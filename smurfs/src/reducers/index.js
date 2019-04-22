@@ -5,7 +5,9 @@ import {
   FETCH_DATA_START,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
-  ADD_SMURF
+  ADD_SMURF_START,
+  ADD_SMURF_SUCCESS,
+  ADD_SMURF_FAILURE
 } from "../actions";
 
 /*
@@ -54,15 +56,22 @@ const rootReducer = (state = initialState, action) => {
         error: action.payload,
         fetchingSmurfs: false
       };
-    case ADD_SMURF:
-      const newSmurf = {
-        name: action.payload.name,
-        age: action.payload.age,
-        height: action.payload.height
-      };
+    case ADD_SMURF_START:
       return {
         ...state,
-        smurfs: [...state.smurfs, newSmurf]
+        fetchingSmurfs: true
+      };
+    case ADD_SMURF_SUCCESS:
+      return {
+        ...state,
+        fetchingSmurfs: false,
+        smurfs: action.payload
+      };
+    case ADD_SMURF_FAILURE:
+      return {
+        ...state,
+        fetchingSmurfs: false,
+        error: action.payload
       };
     default:
       return state;

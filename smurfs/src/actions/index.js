@@ -24,14 +24,28 @@ export const getSmurfs = () => dispatch => {
     });
 };
 
-export const ADD_SMURF = "ADD_SMURF";
+export const ADD_SMURF_SUCCESS = "ADD_SMURF_SUCCESS";
+export const ADD_SMURF_START = "ADD_SMURF_START";
+export const ADD_SMURF_FAILURE = "ADD_SMURF_FAILURE";
 
-export const addSmurf = newSmurf => {
+export const addSmurf = newSmurf => dispatch => {
   console.log("action", newSmurf);
-  return {
-    type: ADD_SMURF,
-    payload: newSmurf
-  };
+  dispatch({ type: ADD_SMURF_START });
+  return axios
+    .post("http://localhost:3333/smurfs/", newSmurf)
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: ADD_SMURF_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: ADD_SMURF_FAILURE,
+        payload: err
+      })
+    );
 };
 
 /*
