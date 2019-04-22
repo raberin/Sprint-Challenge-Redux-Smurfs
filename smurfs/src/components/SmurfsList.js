@@ -2,31 +2,32 @@ import React from "react";
 import { connect } from "react-redux";
 import { getSmurfs } from "../actions/index";
 
-class SmurfsList extends Component {
+import Smurf from "./Smurf";
+
+class SmurfsList extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.getSmurfs();
+    // this.props.getSmurfs();
     console.log(this.props.smurfs);
   }
 
   render() {
     return (
-      <div className="smurfsList">
+      <ul className="smurfsList">
         {this.props.smurfs.map(smurf => {
           return <Smurf key={smurf.id} smurf={smurf} />;
         })}
-      </div>
+      </ul>
     );
   }
 }
 
 const mapStateToProps = state => ({
   smurfs: state.smurfs,
-  error: state.error,
-  isLoading: state.isLoading
+  error: state.error
 });
 
 export default connect(

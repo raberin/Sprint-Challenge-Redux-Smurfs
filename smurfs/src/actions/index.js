@@ -7,7 +7,7 @@ export const FETCH_DATA_START = "FETCH_DATA_START";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
 
-export const getSmurfs = () => {
+export const getSmurfs = () => dispatch => {
   dispatch({ type: FETCH_DATA_START });
   axios
     .get("http://localhost:3333/smurfs")
@@ -22,6 +22,16 @@ export const getSmurfs = () => {
       console.log(err.response);
       dispatch({ type: FETCH_DATA_FAILURE, payload: err });
     });
+};
+
+export const ADD_SMURF = "ADD_SMURF";
+
+export const addSmurf = newSmurf => {
+  console.log("action", newSmurf);
+  return {
+    type: ADD_SMURF,
+    payload: newSmurf
+  };
 };
 
 /*
