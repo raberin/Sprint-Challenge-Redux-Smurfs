@@ -4,8 +4,9 @@
 import {
   FETCH_DATA_START,
   FETCH_DATA_SUCCESS,
-  FETCH_DATA_FAILURE
-} from "../actions/index";
+  FETCH_DATA_FAILURE,
+  ADD_SMURF
+} from "../actions";
 
 /*
  Your initial/default state for this project could *Although does not have to* look a lot like this
@@ -53,6 +54,18 @@ const rootReducer = (state = initialState, action) => {
         error: action.payload,
         fetchingSmurfs: false
       };
+    case ADD_SMURF:
+      const newSmurf = {
+        name: action.payload.name,
+        age: action.payload.age,
+        height: action.payload.height
+      };
+      return {
+        ...state,
+        smurfs: [...state.smurfs, newSmurf]
+      };
+    default:
+      return state;
   }
 };
 

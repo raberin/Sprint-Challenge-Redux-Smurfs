@@ -5,12 +5,8 @@ import { getSmurfs } from "../actions/index";
 import Smurf from "./Smurf";
 
 class SmurfsList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    // this.props.getSmurfs();
+    this.props.getSmurfs();
     console.log(this.props.smurfs);
   }
 
